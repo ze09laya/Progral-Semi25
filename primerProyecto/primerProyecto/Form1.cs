@@ -16,5 +16,21 @@ namespace primerProyecto
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSaludar_Click(object sender, EventArgs e)
+        {
+            lblSaludo.Text = "¡Hola, " + textNombre.Text + "!";
+
+        }
     }
 }
