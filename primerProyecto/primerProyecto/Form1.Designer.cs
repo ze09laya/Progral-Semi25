@@ -28,76 +28,83 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.btnSaludar = new System.Windows.Forms.Button();
-            this.lblSaludo = new System.Windows.Forms.Label();
-            this.textNombre = new System.Windows.Forms.TextBox();
+            this.lblnum1 = new System.Windows.Forms.Label();
+            this.txtnum1 = new System.Windows.Forms.TextBox();
+            this.btncantidad = new System.Windows.Forms.Button();
+            this.txtnum2 = new System.Windows.Forms.TextBox();
+            this.lblnum2 = new System.Windows.Forms.Label();
+            this.lblrespuesta = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // lblnum1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(29, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "APLICACION";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.lblnum1.AutoSize = true;
+            this.lblnum1.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblnum1.Location = new System.Drawing.Point(62, 38);
+            this.lblnum1.Name = "lblnum1";
+            this.lblnum1.Size = new System.Drawing.Size(66, 23);
+            this.lblnum1.TabIndex = 0;
+            this.lblnum1.Text = "Num1:";
             // 
-            // lblNombre
+            // txtnum1
             // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(34, 83);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(84, 23);
-            this.lblNombre.TabIndex = 1;
-            this.lblNombre.Text = "Nombre:";
-            this.lblNombre.Click += new System.EventHandler(this.label2_Click);
+            this.txtnum1.Location = new System.Drawing.Point(134, 38);
+            this.txtnum1.Name = "txtnum1";
+            this.txtnum1.Size = new System.Drawing.Size(161, 26);
+            this.txtnum1.TabIndex = 1;
             // 
-            // btnSaludar
+            // btncantidad
             // 
-            this.btnSaludar.Font = new System.Drawing.Font("Times New Roman", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaludar.Location = new System.Drawing.Point(149, 126);
-            this.btnSaludar.Name = "btnSaludar";
-            this.btnSaludar.Size = new System.Drawing.Size(162, 40);
-            this.btnSaludar.TabIndex = 2;
-            this.btnSaludar.Text = "Saludar";
-            this.btnSaludar.UseVisualStyleBackColor = true;
-            this.btnSaludar.Click += new System.EventHandler(this.btnSaludar_Click);
+            this.btncantidad.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btncantidad.Location = new System.Drawing.Point(107, 179);
+            this.btncantidad.Name = "btncantidad";
+            this.btncantidad.Size = new System.Drawing.Size(120, 45);
+            this.btncantidad.TabIndex = 2;
+            this.btncantidad.Text = "Calcular";
+            this.btncantidad.UseVisualStyleBackColor = true;
+            this.btncantidad.Click += new System.EventHandler(this.btncantidad_Click);
             // 
-            // lblSaludo
+            // txtnum2
             // 
-            this.lblSaludo.AutoSize = true;
-            this.lblSaludo.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaludo.Location = new System.Drawing.Point(205, 169);
-            this.lblSaludo.Name = "lblSaludo";
-            this.lblSaludo.Size = new System.Drawing.Size(50, 23);
-            this.lblSaludo.TabIndex = 3;
-            this.lblSaludo.Text = "Hola";
+            this.txtnum2.Location = new System.Drawing.Point(134, 91);
+            this.txtnum2.Name = "txtnum2";
+            this.txtnum2.Size = new System.Drawing.Size(161, 26);
+            this.txtnum2.TabIndex = 4;
             // 
-            // textNombre
+            // lblnum2
             // 
-            this.textNombre.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textNombre.Location = new System.Drawing.Point(139, 83);
-            this.textNombre.Name = "textNombre";
-            this.textNombre.Size = new System.Drawing.Size(181, 30);
-            this.textNombre.TabIndex = 4;
+            this.lblnum2.AutoSize = true;
+            this.lblnum2.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblnum2.Location = new System.Drawing.Point(62, 94);
+            this.lblnum2.Name = "lblnum2";
+            this.lblnum2.Size = new System.Drawing.Size(66, 23);
+            this.lblnum2.TabIndex = 3;
+            this.lblnum2.Text = "Num2:";
+            // 
+            // lblrespuesta
+            // 
+            this.lblrespuesta.AutoSize = true;
+            this.lblrespuesta.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblrespuesta.Location = new System.Drawing.Point(62, 133);
+            this.lblrespuesta.Name = "lblrespuesta";
+            this.lblrespuesta.Size = new System.Drawing.Size(119, 23);
+            this.lblrespuesta.TabIndex = 5;
+            this.lblrespuesta.Text = "Respuesta: ?";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textNombre);
-            this.Controls.Add(this.lblSaludo);
-            this.Controls.Add(this.btnSaludar);
-            this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblrespuesta);
+            this.Controls.Add(this.txtnum2);
+            this.Controls.Add(this.lblnum2);
+            this.Controls.Add(this.btncantidad);
+            this.Controls.Add(this.txtnum1);
+            this.Controls.Add(this.lblnum1);
             this.Name = "Form1";
             this.Text = "Hola";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,11 +112,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.Button btnSaludar;
-        private System.Windows.Forms.Label lblSaludo;
-        private System.Windows.Forms.TextBox textNombre;
+        private System.Windows.Forms.Label lblnum1;
+        private System.Windows.Forms.TextBox txtnum1;
+        private System.Windows.Forms.Button btncantidad;
+        private System.Windows.Forms.TextBox txtnum2;
+        private System.Windows.Forms.Label lblnum2;
+        private System.Windows.Forms.Label lblrespuesta;
     }
 }
 

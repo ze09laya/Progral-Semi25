@@ -27,9 +27,18 @@ namespace primerProyecto
 
         }
 
-        private void btnSaludar_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            lblSaludo.Text = "¡Hola, " + textNombre.Text + "!";
+
+        }
+
+        private void btncantidad_Click(object sender, EventArgs e)
+        {
+            double num1, num2, respuesta;
+            num1 = Double.Parse( txtnum1.Text);
+            num2 = Double.Parse(txtnum2.Text);
+            respuesta = num1 + num2;
+            lblrespuesta.Text = "Respuesta: " + respuesta;
 
         }
     }

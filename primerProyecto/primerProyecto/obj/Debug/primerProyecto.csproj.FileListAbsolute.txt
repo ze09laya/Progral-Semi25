@@ -8,3 +8,14 @@ C:\Users\pc\OneDrive\Desktop\Progral-Semi25\primerProyecto\primerProyecto\obj\De
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.CoreCompileInputs.cache
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25\primerProyecto\primerProyecto\obj\Debug\primerProyecto.exe
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25\primerProyecto\primerProyecto\obj\Debug\primerProyecto.pdb
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\bin\Debug\primerProyecto.exe.config
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\bin\Debug\primerProyecto.exe
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\bin\Debug\primerProyecto.pdb
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.AssemblyReference.cache
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\obj\Debug\primerProyecto.exe.config
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\obj\Debug\primerProyecto.Form1.resources
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\obj\Debug\primerProyecto.Properties.Resources.resources
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.GenerateResource.cache
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.CoreCompileInputs.cache
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\obj\Debug\primerProyecto.exe
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-1\primerProyecto\primerProyecto\obj\Debug\primerProyecto.pdb
