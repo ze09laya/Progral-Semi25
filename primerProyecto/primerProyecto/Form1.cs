@@ -32,174 +32,57 @@ namespace primerProyecto
 
         }
 
-        private void btncantidad_Click(object sender, EventArgs e)
-        {
-            double num1, num2, respuesta = 0;
-            num1 = Double.Parse(txtnum1.Text);
-            num2 = Double.Parse(txtnum2.Text);
-            if (optSuma.Checked)
-            {
-                respuesta = num1 + num2;
-            }
-
-            if (optResta.Checked)
-            {
-                respuesta = num1 - num2;
-            }
-
-            if (optMultiplicacion.Checked)
-            {
-                respuesta = num1 * num2;
-            }
-
-            if (optDivision.Checked)
-            {
-                respuesta = num1 / num2;
-            }
-
-            if (optExponente.Checked)
-            {
-                respuesta = Math.Pow(num1, num2);
-            }
-
-
-            if (optPorcentaje.Checked)
-            {
-                respuesta = (num1 / num2) * 100;
-            }
-
-            if (optFactorial.Checked)
-            {
-                int factorial = (int)num1;
-                for (int i = (int)num1 - 1; i>1; i--) {  //5!=5*4*3*2=12
-                    factorial *= i;
-
-                }
-                respuesta = factorial;
-            }
-            lblrespuesta.Text = "Respuesta: " + respuesta;
-
-            if (optExponente.Checked)
-            {
-                respuesta = Math.Pow(num1, num2);
-            }
-
-            if (optPrimo.Checked){
-                int i = 1, acum = 0;
-                while (i <= num1 && acum<3) {
-                    if (num1%i==0) {
-                        acum++; //acum = acum;
-                    }
-                    i++;
-            }
-            if (acum <= 2){
-                lblrespuesta.Text = "Respuesta: " + num1 + " es primo";
-            }else {
-                lblrespuesta.Text = "Respuesta: " + num1 + " no es primo";
-                }
-            }
-
-
-
-            //Porcentaje
-            //Factorial. 5! = 5x4x3x3x1=120
-            //Modulo
-
-            
-        }
-
+        
         private void cboOpciones_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void btnCalcularopciones_Click(object sender, EventArgs e)
+        private double[][] tablaIsr = {
+            new Double[] {0.01, 550, 0, 0},
+            new Double[] {550.01, 895.24, 0.10, 17.67},
+            new Double[] {895.25, 2038.10, 0.20, 60},
+            new Double[] {2038.11, 9999999, 0.30, 288.57}
+
+
+            };
+
+        private double calcularDeducciones(double sueldo, double porcentaje)
         {
-            double num1 = double.Parse(txtnum1.Text);
-            double num2 = double.Parse(txtnum2.Text);
-            double respuesta = 0;
+            return sueldo * porcentaje;
+        }
 
-            switch (cboOpciones.SelectedIndex)
+        private double calcularIsr(double sueldo)
+        {
+            double isr = 0;
+            for (int i = 0; i < tablaIsr.Length; i++)
             {
-                case 0: // Suma
-                    respuesta = num1 + num2;
-                    lblrespuesta.Text = "Respuesta: " + respuesta;
-                    break;
+                if (sueldo >= tablaIsr[i][0] && sueldo <= tablaIsr[i][1])
+                {
+                    isr = (sueldo - tablaIsr[i][0]) * tablaIsr[i][2] + tablaIsr[i][3];
 
-                case 1: // Resta
-                    respuesta = num1 - num2;
-                    lblrespuesta.Text = "Respuesta: " + respuesta;
-                    break;
-
-                case 2: // Multiplicación
-                    respuesta = num1 * num2;
-                    lblrespuesta.Text = "Respuesta: " + respuesta;
-                    break;
-
-                case 3: // División
-                    if (num2 != 0)
-                    {
-                        respuesta = num1 / num2;
-                        lblrespuesta.Text = "Respuesta: " + respuesta;
-                    }
-                    else
-                    {
-                        lblrespuesta.Text = "Error: División por cero";
-                    }
-                    break;
-
-                case 4: // Exponente (potencia)
-                    respuesta = Math.Pow(num1, num2);
-                    lblrespuesta.Text = "Respuesta: " + respuesta;
-                    break;
-
-                case 5: // Porcentaje
-                   
-                        respuesta = (num1 / num2) * 100;
-                        lblrespuesta.Text = "Respuesta: " + respuesta;
-                    break;
-
-                case 6: // Verificar si es primo
-                    if (num1 < 2)
-                    {
-                        lblrespuesta.Text = "Respuesta: " + num1 + " no es primo";
-                    }
-                    else
-                    {
-                        int acum = 0;
-                        for (int i = 1; i <= (int)num1; i++)
-                        {
-                            if ((int)num1 % i == 0)
-                                acum++;
-                        }
-
-                        if (acum == 2)
-                            lblrespuesta.Text = "Respuesta: " + num1 + " es primo";
-                        else
-                            lblrespuesta.Text = "Respuesta: " + num1 + " no es primo";
-                    }
-                    break;
-
-                case 7: // Factorial
-                    if (num1 < 0)
-                    {
-                        lblrespuesta.Text = "Error: Factorial de número negativo";
-                    }
-                    else
-                    {
-                        respuesta = 1;
-                        for (int i = 1; i <= (int)num1; i++)
-                        {
-                            respuesta *= i;
-                        }
-                        lblrespuesta.Text = "Respuesta: " + respuesta;
-                    }
-                    break;
-
-                default:
-                    lblrespuesta.Text = "Seleccione una opción válida";
-                    break;
+                }
             }
+            return isr;
+        }
+      
+        private void btnCalcular_Click_1(object sender, EventArgs e)
+        {
+            double sueldo = 0, isss = 0, afp = 0, isr = 0, sueldoNeto = 0;
+            sueldo = double.Parse(txtSueldo.Text);
+
+            isss = calcularDeducciones(sueldo, 0.03); // 3% de ISSS -> 3/100=0.03
+            afp = calcularDeducciones(sueldo, 0.0725); // 7.25% de AFP -> 7.25/100=0.0725
+            isr = calcularIsr(sueldo - isss - afp); // Calcular ISR
+
+            sueldoNeto = sueldo - isss - afp - isr; // Calcular sueldo neto
+
+            lblIsss.Text = "ISSS: " + isss.ToString("C2");
+            lblAFP.Text = "AFP: " + afp.ToString("C2");
+            lblIsr.Text = "ISR: " + isr.ToString("C2");
+            lblTotalDeducciones.Text = "Total Deducciones: " + (isss + afp + isr).ToString("C2");
+            lblSueldoNeto.Text = "Sueldo Neto: " + sueldoNeto.ToString("C2");
+
         }
     }
 }
