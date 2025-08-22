@@ -63,3 +63,14 @@ C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Conversores-\primerProyecto\primerPr
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Conversores-\primerProyecto\primerProyecto\bin\Debug\primerProyecto.exe.config
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Conversores-\primerProyecto\primerProyecto\bin\Debug\primerProyecto.exe
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Conversores-\primerProyecto\primerProyecto\bin\Debug\primerProyecto.pdb
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.AssemblyReference.cache
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\obj\Debug\primerProyecto.exe.config
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\obj\Debug\primerProyecto.Form1.resources
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\obj\Debug\primerProyecto.Properties.Resources.resources
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.GenerateResource.cache
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.CoreCompileInputs.cache
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\obj\Debug\primerProyecto.exe
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\obj\Debug\primerProyecto.pdb
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\bin\Debug\primerProyecto.exe.config
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\bin\Debug\primerProyecto.exe
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Clase21\primerProyecto\primerProyecto\bin\Debug\primerProyecto.pdb
