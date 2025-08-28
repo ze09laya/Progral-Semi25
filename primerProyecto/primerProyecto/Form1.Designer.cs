@@ -86,7 +86,8 @@
             "Masa",
             "Volumen",
             "Almacenamiento",
-            "Tiempo"});
+            "Tiempo",
+            "Area"});
             this.cboTipoConversor.Location = new System.Drawing.Point(160, 96);
             this.cboTipoConversor.Name = "cboTipoConversor";
             this.cboTipoConversor.Size = new System.Drawing.Size(256, 28);
@@ -144,7 +145,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 382);
+            this.ClientSize = new System.Drawing.Size(898, 390);
             this.Controls.Add(this.btnConvertir);
             this.Controls.Add(this.cboAConversor);
             this.Controls.Add(this.lblAConversor);
