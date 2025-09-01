@@ -25,49 +25,25 @@ namespace primerProyecto
         //LINQ = Lenguaje de Consulta Integrado
 
 
-       
-            double media(int[] serie)
-            {
-                int n = serie.Length;
-                double suma = 0;
 
-                for (int i = 0; i < n; i++)
-                {
-                    suma += serie[i];
-                }
-                return suma / n;
-            }
-            
-            
-                double tipica(int[] serie, double m)
-                {
-                    double tipica = 0;
-                    int n = serie.Length;
+        double media(int[] serie)
+        {
+            return serie.Average();
+        }
+        double tipica(int[] serie, double m)
+        {
+            return Math.Sqrt(serie.Average(n => Math.Pow(n - m, 2)));
+        }
+        double armonica(int[] serie)
+        {
+            int n = serie.Length;
+            return n / serie.Sum(num => 1.0 / num);
+        }
 
-                    for (int i = 0; i < n; i++)
-                    {
-                        
-                        tipica += Math.Pow(serie[i] - m, 2);
-                    }
-                    tipica = Math.Sqrt(tipica / n);
-                    return tipica;
-                }
-                
-                
-                    double armonica(int[] serie)
-                    {
-                        double mediaArmonica = 0;
-                        int n = serie.Length;
-                        for (int i = 0; i < n; i++)
-                        {
-                            mediaArmonica += 1 / (double)serie[i];
-                        }
-                        return n / mediaArmonica;
-                    }
-
-private void btnCalcular_Click(object sender, EventArgs e)
+        private void btnCalcular_Click(object sender, EventArgs e)
         {
             int[] serie = txtSerie.Text.Split(',').Select(n => int.Parse(n)).ToArray(); //5,8,1,9 => ["5", "8", "1", "9"]
+
             double mediaAritmetica = media(serie);
             double desviacionTipica = tipica(serie, mediaAritmetica);
             double mediaArmonica = armonica(serie);
