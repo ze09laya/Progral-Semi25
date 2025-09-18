@@ -17,6 +17,13 @@ namespace primerProyecto
         {
             InitializeComponent();
         }
+        Conexion1 objconexion1 = new Conexion1();
+        DataSet objDs = new DataSet();
+        DataTable objDt = new DataTable();
+
+        public int posicion = 0;
+        public string accion = "nuevo";
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
