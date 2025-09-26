@@ -140,7 +140,7 @@ namespace primerProyecto
                     actualizarDs();
                 }
             }
-    }
+        }
 
         private void btnModificarAlumno_Click(object sender, EventArgs e)
         {
@@ -177,19 +177,46 @@ namespace primerProyecto
 
         private void txtBuscarAlumno_KeyUp(object sender, KeyEventArgs e)
         {
-            filtrarDatos(txtBuscarAlumno.Text);
+            try
+            {
+                filtrarDatos(txtBuscarAlumno.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void filtrarDatos(String valor)
         {
-            DataView objDv = objDt.DefaultView;
-            objDv.RowFilter = "codigo like '%" + valor + "%' OR nombre like '%" + valor + "%'";
-            grdAlumnos.DataSource = objDv;
-            seleccionarAlumno();
+            try
+            {
+                DataView objDv = objDt.DefaultView;
+                objDv.RowFilter = "codigo like '%" + valor + "%' OR nombre like '" + valor + "%'";
+                grdAlumnos.DataSource = objDv;
+                seleccionarAlumno();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
         private void seleccionarAlumno()
         {
-            posicion = objDt.Rows.IndexOf(objDt.Rows.Find(grdAlumnos.CurrentRow.Cells["id"].Value));
-            mostrarDatos();
+            try
+            {
+                if (grdAlumnos.CurrentRow == null)
+                {
+                    MessageBox.Show("No hay filas");
+                    return;
+                }
+                string id = grdAlumnos.CurrentRow.Cells["id"].Value.ToString();
+                posicion = objDt.Rows.IndexOf(objDt.Rows.Find(id));
+                mostrarDatos();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
         private void grdAlumnos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -197,7 +224,10 @@ namespace primerProyecto
         }
     }
 }
-  
+
+
+
+
 
 
 

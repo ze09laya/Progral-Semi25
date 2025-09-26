@@ -50,9 +50,9 @@
             this.btnModificarAlumno = new System.Windows.Forms.Button();
             this.btnAgregarAlumno = new System.Windows.Forms.Button();
             this.grbBusquedaAlumno = new System.Windows.Forms.GroupBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.txtBuscarAlumno = new System.Windows.Forms.TextBox();
             this.grdAlumnos = new System.Windows.Forms.DataGridView();
+            this.txtBuscarAlumno = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,7 +97,7 @@
             // 
             // txtTelefonoAlumno
             // 
-            this.txtTelefonoAlumno.Location = new System.Drawing.Point(170, 279);
+            this.txtTelefonoAlumno.Location = new System.Drawing.Point(237, 279);
             this.txtTelefonoAlumno.Name = "txtTelefonoAlumno";
             this.txtTelefonoAlumno.Size = new System.Drawing.Size(184, 30);
             this.txtTelefonoAlumno.TabIndex = 8;
@@ -122,7 +122,7 @@
             // 
             // txtDireccionAlumno
             // 
-            this.txtDireccionAlumno.Location = new System.Drawing.Point(170, 222);
+            this.txtDireccionAlumno.Location = new System.Drawing.Point(237, 222);
             this.txtDireccionAlumno.Name = "txtDireccionAlumno";
             this.txtDireccionAlumno.Size = new System.Drawing.Size(184, 30);
             this.txtDireccionAlumno.TabIndex = 5;
@@ -138,7 +138,7 @@
             // 
             // txtNombreAlumno
             // 
-            this.txtNombreAlumno.Location = new System.Drawing.Point(170, 163);
+            this.txtNombreAlumno.Location = new System.Drawing.Point(237, 163);
             this.txtNombreAlumno.Name = "txtNombreAlumno";
             this.txtNombreAlumno.Size = new System.Drawing.Size(184, 30);
             this.txtNombreAlumno.TabIndex = 3;
@@ -154,7 +154,7 @@
             // 
             // txtCodigoAlumno
             // 
-            this.txtCodigoAlumno.Location = new System.Drawing.Point(170, 110);
+            this.txtCodigoAlumno.Location = new System.Drawing.Point(237, 110);
             this.txtCodigoAlumno.Name = "txtCodigoAlumno";
             this.txtCodigoAlumno.Size = new System.Drawing.Size(184, 30);
             this.txtCodigoAlumno.TabIndex = 1;
@@ -287,14 +287,6 @@
             this.grbBusquedaAlumno.TabStop = false;
             this.grbBusquedaAlumno.Text = "Busqueda Alumnos";
             // 
-            // txtBuscarAlumno
-            // 
-            this.txtBuscarAlumno.Location = new System.Drawing.Point(10, 45);
-            this.txtBuscarAlumno.Name = "txtBuscarAlumno";
-            this.txtBuscarAlumno.Size = new System.Drawing.Size(817, 30);
-            this.txtBuscarAlumno.TabIndex = 10;
-            this.txtBuscarAlumno.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscarAlumno_KeyUp);
-            // 
             // grdAlumnos
             // 
             this.grdAlumnos.AllowUserToAddRows = false;
@@ -314,9 +306,17 @@
             this.grdAlumnos.Size = new System.Drawing.Size(825, 266);
             this.grdAlumnos.TabIndex = 11;
             // 
+            // txtBuscarAlumno
+            // 
+            this.txtBuscarAlumno.Location = new System.Drawing.Point(10, 45);
+            this.txtBuscarAlumno.Name = "txtBuscarAlumno";
+            this.txtBuscarAlumno.Size = new System.Drawing.Size(817, 30);
+            this.txtBuscarAlumno.TabIndex = 10;
+            this.txtBuscarAlumno.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscarAlumno_KeyUp);
+            // 
             // Id
             // 
-            this.Id.DataPropertyName = "idAlumno";
+            this.Id.DataPropertyName = "IdAlumno";
             this.Id.HeaderText = "ID";
             this.Id.MinimumWidth = 8;
             this.Id.Name = "Id";
@@ -326,7 +326,7 @@
             // 
             // codigo
             // 
-            this.codigo.DataPropertyName = "idAlumno";
+            this.codigo.DataPropertyName = "codigo";
             this.codigo.HeaderText = "Codigo";
             this.codigo.MinimumWidth = 8;
             this.codigo.Name = "codigo";
@@ -335,7 +335,7 @@
             // 
             // nombre
             // 
-            this.nombre.DataPropertyName = "idAlumno";
+            this.nombre.DataPropertyName = "nombre";
             this.nombre.HeaderText = "Nombre";
             this.nombre.MinimumWidth = 8;
             this.nombre.Name = "nombre";
@@ -344,7 +344,7 @@
             // 
             // direccion
             // 
-            this.direccion.DataPropertyName = "idAlumno";
+            this.direccion.DataPropertyName = "direccion";
             this.direccion.HeaderText = "Direccion";
             this.direccion.MinimumWidth = 8;
             this.direccion.Name = "direccion";
@@ -353,7 +353,7 @@
             // 
             // telefono
             // 
-            this.telefono.DataPropertyName = "idAlumno";
+            this.telefono.DataPropertyName = "telefono";
             this.telefono.HeaderText = "Telefono";
             this.telefono.MinimumWidth = 8;
             this.telefono.Name = "telefono";
