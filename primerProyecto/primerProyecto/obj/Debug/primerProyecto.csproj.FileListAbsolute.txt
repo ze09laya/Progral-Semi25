@@ -168,3 +168,4 @@ C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Periodos\primerProyecto\primerProyec
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Periodos\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.CoreCompileInputs.cache
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Periodos\primerProyecto\primerProyecto\obj\Debug\primerProyecto.exe
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Periodos\primerProyecto\primerProyecto\obj\Debug\primerProyecto.pdb
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Periodos\primerProyecto\primerProyecto\obj\Debug\primerProyecto.frmPeriodos.resources
