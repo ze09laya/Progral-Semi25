@@ -54,6 +54,7 @@
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cboBuscarMaterias = new System.Windows.Forms.ComboBox();
             this.grbBusquedaMaterias.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdMaterias)).BeginInit();
             this.grbEdicionMaterias.SuspendLayout();
@@ -63,6 +64,7 @@
             // 
             // grbBusquedaMaterias
             // 
+            this.grbBusquedaMaterias.Controls.Add(this.cboBuscarMaterias);
             this.grbBusquedaMaterias.Controls.Add(this.grdMaterias);
             this.grbBusquedaMaterias.Controls.Add(this.txtBuscarMaterias);
             this.grbBusquedaMaterias.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -93,9 +95,9 @@
             // 
             // txtBuscarMaterias
             // 
-            this.txtBuscarMaterias.Location = new System.Drawing.Point(10, 45);
+            this.txtBuscarMaterias.Location = new System.Drawing.Point(218, 45);
             this.txtBuscarMaterias.Name = "txtBuscarMaterias";
-            this.txtBuscarMaterias.Size = new System.Drawing.Size(817, 30);
+            this.txtBuscarMaterias.Size = new System.Drawing.Size(609, 30);
             this.txtBuscarMaterias.TabIndex = 10;
             this.txtBuscarMaterias.TextChanged += new System.EventHandler(this.txtBuscarMaterias_TextChanged);
             this.txtBuscarMaterias.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscarMaterias_KeyUp);
@@ -225,6 +227,7 @@
             this.grbDatosMaterias.TabIndex = 6;
             this.grbDatosMaterias.TabStop = false;
             this.grbDatosMaterias.Text = "Datos";
+            this.grbDatosMaterias.Enter += new System.EventHandler(this.grbDatosMaterias_Enter);
             // 
             // idMaterias
             // 
@@ -300,7 +303,7 @@
             this.Id.Name = "Id";
             this.Id.ReadOnly = true;
             this.Id.Visible = false;
-            this.Id.Width = 150;
+            this.Id.Width = 200;
             // 
             // codigo
             // 
@@ -328,6 +331,17 @@
             this.unidad.Name = "unidad";
             this.unidad.ReadOnly = true;
             this.unidad.Width = 150;
+            // 
+            // cboBuscarMaterias
+            // 
+            this.cboBuscarMaterias.FormattingEnabled = true;
+            this.cboBuscarMaterias.Items.AddRange(new object[] {
+            "Codigo",
+            "Materias"});
+            this.cboBuscarMaterias.Location = new System.Drawing.Point(0, 46);
+            this.cboBuscarMaterias.Name = "cboBuscarMaterias";
+            this.cboBuscarMaterias.Size = new System.Drawing.Size(212, 31);
+            this.cboBuscarMaterias.TabIndex = 12;
             // 
             // Materias1
             // 
@@ -381,5 +395,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn unidad;
+        private System.Windows.Forms.ComboBox cboBuscarMaterias;
     }
 }

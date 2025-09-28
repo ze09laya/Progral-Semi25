@@ -52,6 +52,7 @@ namespace primerProyecto
         private void Materias1_Load(object sender, EventArgs e)
         {
             actualizarDs();
+            cboBuscarMaterias. SelectedIndex = 1; //Buscar por materia
         }
 
         private void btnUltimoMaterias_Click(object sender, EventArgs e)
@@ -191,7 +192,18 @@ namespace primerProyecto
             try
             {
                 DataView objDv = objDt.DefaultView;
-                objDv.RowFilter = "codigo like '%" + valor + "%' OR nombre like '" + valor + "%'";
+                switch (cboBuscarMaterias.SelectedIndex){
+                    case 0: //Codigo
+                        objDv.RowFilter = string.IsNullOrEmpty(valor) ? "" : "codigo = " + valor;
+                        break;
+                    case 1: //Nombre
+                        objDv.RowFilter = " nombre like '%" + valor + "%'";
+                        break;
+
+
+
+                }
+              
                 grdMaterias.DataSource = objDv;
                 seleccionarMaterias();
             }
@@ -206,7 +218,7 @@ namespace primerProyecto
             {
                 if (grdMaterias.CurrentRow == null)
                 {
-                    MessageBox.Show("No hay filas");
+               
                     return;
                 }
                 string id = grdMaterias.CurrentRow.Cells["Id"].Value.ToString();
@@ -222,6 +234,11 @@ namespace primerProyecto
         private void txtBuscarMaterias_TextChanged(object sender, EventArgs e)
         {
             seleccionarMaterias();
+        }
+
+        private void grbDatosMaterias_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
