@@ -79,6 +79,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmNotas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNotas.Designer.cs">
+      <DependentUpon>frmNotas.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPeriodos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNotas.resx">
+      <DependentUpon>frmNotas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPeriodos.resx">
       <DependentUpon>frmPeriodos.cs</DependentUpon>
@@ -168,6 +177,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>db_academica.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\notas.png" />
     <None Include="Resources\aplicaciones.png" />
     <None Include="Resources\archivo.png" />
     <None Include="Resources\salir.png" />

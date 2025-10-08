@@ -69,7 +69,7 @@
             this.salirToolStripMenuItem.Image = global::primerProyecto.Properties.Resources.salir;
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
             this.salirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(211, 34);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -84,7 +84,7 @@
             this.notasToolStripMenuItem});
             this.aplicacionesToolStripMenuItem.Image = global::primerProyecto.Properties.Resources.aplicaciones;
             this.aplicacionesToolStripMenuItem.Name = "aplicacionesToolStripMenuItem";
-            this.aplicacionesToolStripMenuItem.Size = new System.Drawing.Size(150, 30);
+            this.aplicacionesToolStripMenuItem.Size = new System.Drawing.Size(150, 29);
             this.aplicacionesToolStripMenuItem.Text = "Aplicaciones";
             // 
             // alumnosToolStripMenuItem
@@ -130,9 +130,12 @@
             // 
             // notasToolStripMenuItem
             // 
+            this.notasToolStripMenuItem.Image = global::primerProyecto.Properties.Resources.notas;
             this.notasToolStripMenuItem.Name = "notasToolStripMenuItem";
+            this.notasToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
             this.notasToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.notasToolStripMenuItem.Text = "Notas";
+            this.notasToolStripMenuItem.Click += new System.EventHandler(this.notasToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 

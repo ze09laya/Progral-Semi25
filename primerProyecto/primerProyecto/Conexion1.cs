@@ -10,9 +10,9 @@ namespace primerProyecto
 {
     internal class Conexion1
     {
-        SqlConnection objConexion = new SqlConnection();
-        SqlCommand objComando = new SqlCommand();
-        SqlDataAdapter objAdaptador = new SqlDataAdapter();
+        public SqlConnection objConexion = new SqlConnection();
+       public SqlCommand objComando = new SqlCommand();
+        public SqlDataAdapter objAdaptador = new SqlDataAdapter();
         DataSet objDs = new DataSet();
 
         public Conexion1()
@@ -36,7 +36,8 @@ namespace primerProyecto
             objAdaptador.Fill(objDs, "materias");
 
             objComando.CommandText = "SELECT * FROM Docente";
-            objAdaptador.Fill(objDs, "Docente"); // ✅ ahora correctamente
+            objAdaptador.Fill(objDs, "Docente"); 
+
 
             return objDs;
         }
@@ -72,11 +73,11 @@ namespace primerProyecto
             else if (accion == "modificar")
             {
                 sql = "UPDATE materias SET codigo='" + datos[1] + "', nombre='" + datos[2] +
-                      "', unidad='" + datos[3] + "' WHERE idMaterias='" + datos[0] + "'";
+                      "', unidad='" + datos[3] + "' WHERE IdMaterias='" + datos[0] + "'";
             }
             else if (accion == "eliminar")
             {
-                sql = "DELETE FROM materias WHERE idMaterias='" + datos[0] + "'";
+                sql = "DELETE FROM materias WHERE IdMaterias='" + datos[0] + "'";
             }
 
             return ejecutarSQL(sql, datos);
@@ -104,6 +105,21 @@ namespace primerProyecto
         }
 
         private String ejecutarSQL(String sql, String[] datos)
+        {
+            try
+            {
+                objComando.Connection = objConexion;
+                objComando.CommandText = sql;
+                return objComando.ExecuteNonQuery().ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+
+    public string ejecutarSQL(string sql)
         {
             try
             {
