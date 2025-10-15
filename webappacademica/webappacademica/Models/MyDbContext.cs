@@ -1,12 +1,11 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 namespace webappacademica.Models
 {
-    public class MyDbContext : DbContext {
-
+    public class MyDbContext : DbContext
+    {
         public MyDbContext() { }
-        public MyDbContext(DbContextOptions<MyDbContext> options): base(options) { }
 
+        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
         public DbSet<Alumno> Alumnos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace webappacademica.Models
 {
-    public class Alumno {
+    public class Alumno
+    {
         [Key]
         public int idAlumno { get; set; }
+
         public string codigo { get; set; }
         public string nombre { get; set; }
         public string direccion { get; set; }
