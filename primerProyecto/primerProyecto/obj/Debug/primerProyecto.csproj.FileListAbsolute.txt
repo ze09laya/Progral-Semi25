@@ -107,3 +107,17 @@ C:\Users\pc\OneDrive\Desktop\Progral-Semi25-ExamenParcial\primerProyecto\primerP
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25-ExamenParcial\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.CoreCompileInputs.cache
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25-ExamenParcial\primerProyecto\primerProyecto\obj\Debug\primerProyecto.exe
 C:\Users\pc\OneDrive\Desktop\Progral-Semi25-ExamenParcial\primerProyecto\primerProyecto\obj\Debug\primerProyecto.pdb
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\bin\Debug\primerProyecto.exe.config
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\bin\Debug\primerProyecto.exe
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\bin\Debug\primerProyecto.pdb
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.AssemblyReference.cache
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\obj\Debug\primerProyecto.exe.config
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\obj\Debug\primerProyecto.frmUsuarios.resources
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\obj\Debug\primerProyecto.login.resources
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\obj\Debug\primerProyecto.Properties.Resources.resources
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.GenerateResource.cache
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\obj\Debug\primerProyecto.csproj.CoreCompileInputs.cache
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\obj\Debug\primerProyecto.exe
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\obj\Debug\primerProyecto.pdb
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\bin\Debug\parcial.mdf
+C:\Users\pc\OneDrive\Desktop\Progral-Semi25-Parcial2\primerProyecto\primerProyecto\bin\Debug\parcial_log.ldf
