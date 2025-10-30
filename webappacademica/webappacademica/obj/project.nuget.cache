@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3iFryu/o7JY=",
+  "dgSpecHash": "78dOv+lrUdQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\pc\\OneDrive\\Desktop\\Progral-Semi25-NA\\webappacademica\\webappacademica\\webappacademica.csproj",
+  "projectFilePath": "C:\\Users\\pc\\OneDrive\\Desktop\\Progral-Semi25-Clas30\\webappacademica\\webappacademica\\webappacademica.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pc\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
