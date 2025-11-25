@@ -63,7 +63,8 @@
         </div>
     </div>
 </form>
-<script>var accion = 'nuevo',
+<script>
+    var accion = 'nuevo',
         idDocente = 0,
         miFoto = '';
     frmDocente.addEventListener('submit', e => {
@@ -73,7 +74,7 @@
     function seleccionarImg(file) {
         let archivo = file.files[0] || '';
         const lector = new FileReader();
-        lector.onload = e=> {
+        lector.onload = e => {
             miFoto = e.target.result;
             imgPreVisualizacionFotoDocente.src = miFoto;
         };
@@ -116,7 +117,7 @@
         txtTelefonoDocente.value = "";
         txtEmailDocente.value = "";
         miFoto = '';
-        imgPreVisualizacionFotoDocente.src= '';
+        imgPreVisualizacionFotoDocente.src = '';
     }
     function modificarDocente(docente) {
         accion = "modificar";
@@ -127,4 +128,5 @@
         txtTelefonoDocente.value = docente.telefono;
         txtEmailDocente.value = docente.email;
         miFoto = 'data:image/png;base64,' + docente.foto;
-    }</script>
+    }
+</script>

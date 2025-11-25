@@ -1,4 +1,4 @@
-﻿﻿<form id="frmBusquedaAlumno">
+﻿<form id="frmBusquedaAlumno">
     <div class="card border-secondary mb-3" style="min-width: 700px;">
         <div class="card-header">
             <div class="d-flex">
@@ -37,14 +37,9 @@
         listarAlumnos(txtBuscarAlumno.value);
     });
 
-    async function listarAlumnos(buscar='') {
-        const respuesta = await fetch(`/api/Alumnos/buscar?buscar=${buscar}`, {
-            method:'GET',
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }), alumnos = await respuesta.json();
-        let filas = '';
+    async function listarAlumnos(buscar = '') {
+        let alumnos = await obtenerAlumnos(buscar),
+            filas = '';
         alumnos.forEach(alumno => {
             filas += `
                 <tr onClick='modificarAlumno(${JSON.stringify(alumno)})'>
@@ -61,7 +56,7 @@
     async function eliminarAlumno(alumno, event) {
         event.preventDefault();
 
-        if (confirm(`Esta seguro de eliminar a ${alumno.nombre.trim()}?`) ) {
+        if (confirm(`Esta seguro de eliminar a ${alumno.nombre.trim()}?`)) {
             const respuesta = await fetch(`/api/Alumnos/${alumno.idAlumno}`, {
                 method: 'DELETE',
                 headers: {
