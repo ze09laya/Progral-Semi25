@@ -71,6 +71,10 @@
         e.preventDefault();
         guardarDocente();
     });
+    frmDocente.addEventListener('reset', e => {
+        e.preventDefault();
+        limpiarDatosDocente();
+    });
     function seleccionarImg(file) {
         let archivo = file.files[0] || '';
         const lector = new FileReader();
@@ -89,11 +93,11 @@
             email: txtEmailDocente.value,
             foto: miFoto.split(',')[1] || ''
         },
-            url = 'https://localhost:7290/api/Docentes',
+            url = 'https://localhost:7005/api/Docentes',
             method = 'POST';
         if (accion == "modificar") {
             method = 'PUT';
-            url = `https://localhost:7290/api/Docentes/${idDocente}`;
+            url = `https://localhost:7005/api/Docentes/${idDocente}`;
             datos.idDocente = idDocente;
         }
         const respuesta = await fetch(url, {

@@ -42,16 +42,20 @@
         e.preventDefault();
         guardarPeriodo();
     });
+    frmPeriodo.addEventListener('reset', e => {
+        e.preventDefault();
+        limpiarDatosPeriodo();
+    });
     async function guardarPeriodo() {
         let datos = {
             fecha: txtFechaPeriodo.value,
             periodo: cboPeriodo.value
         },
-            url = 'https://localhost:7290/api/Periodos',
+            url = 'https://localhost:7005/api/Periodos',
             method = 'POST';
         if (accion == "modificar") {
             method = 'PUT';
-            url = `https://localhost:7290/api/Periodos/${idPeriodo}`;
+            url = `https://localhost:7005/api/Periodos/${idPeriodo}`;
             datos.idPeriodo = idPeriodo;
         }
         const respuesta = await fetch(url, {

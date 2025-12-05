@@ -45,17 +45,21 @@
         e.preventDefault();
         guardarMateria();
     });
+    frmMateria.addEventListener('reset', e => {
+        e.preventDefault();
+        limpiarDatosMateria();
+    });
     async function guardarMateria() {
         let datos = {
             codigo: txtCodigoMateria.value,
             nombre: txtNombreMateria.value,
             uv: txtUvMateria.value
         },
-            url = 'https://localhost:7290/api/Materias',
+            url = 'https://localhost:7005/api/Materias',
             method = 'POST';
         if (accion == "modificar") {
             method = 'PUT';
-            url = `https://localhost:7290/api/Materias/${idMateria}`;
+            url = `https://localhost:7005/api/Materias/${idMateria}`;
             datos.idMateria = idMateria;
         }
         const respuesta = await fetch(url, {
