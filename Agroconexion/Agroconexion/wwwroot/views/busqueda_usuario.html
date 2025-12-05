@@ -1,0 +1,179 @@
+﻿<style>
+    #frmBusquedaUsuario {
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 0.87rem;
+    }
+
+
+        #frmBusquedaUsuario .card {
+            border: none !important;
+            background: #1f1f1f;
+            border-radius: 18px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+        }
+
+   
+        #frmBusquedaUsuario .card-header {
+            background: linear-gradient(90deg, #9bbfa9, #85b59b);
+            border-radius: 18px 18px 0 0;
+            font-size: 1.1rem;
+            color: #172820;
+            font-weight: 600;
+            padding: 14px 18px;
+        }
+
+        #frmBusquedaUsuario .btn-close {
+            filter: invert(0%);
+        }
+
+            #frmBusquedaUsuario .btn-close:hover {
+                opacity: 1;
+            }
+
+
+        #frmBusquedaUsuario table {
+            color: #d7e8df;
+        }
+
+        #frmBusquedaUsuario th {
+            color: #b7d2c3;
+            font-weight: 600;
+            background-color: #2b2b2b !important;
+            border-bottom: 2px solid #3d3d3d;
+        }
+
+        #frmBusquedaUsuario tbody tr {
+            background: #262626;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            #frmBusquedaUsuario tbody tr:hover {
+                background: #2f3c34;
+            }
+
+        #frmBusquedaUsuario input[type="search"] {
+            background: #2b2b2b;
+            border: 1px solid #6f9c85;
+            color: #d3e5da;
+            border-radius: 10px;
+            padding-left: 10px;
+            transition: 0.2s;
+        }
+
+            #frmBusquedaUsuario input[type="search"]:focus {
+                border-color: #8cc7a7;
+                box-shadow: 0 0 6px rgba(140,199,167,0.4);
+            }
+
+
+        #frmBusquedaUsuario .btn-outline-danger {
+            border-color: #d98a8a;
+            color: #e69c9c;
+        }
+
+            #frmBusquedaUsuario .btn-outline-danger:hover {
+                background: #e69c9c;
+                color: #1f1f1f;
+            }
+</style>
+
+<form id="frmBusquedaUsuario">
+    <div class="card border-secondary mb-3" style="min-width: 700px;">
+        <div class="card-header">
+            <div class="d-flex">
+                Consulta de Usuarios
+                <div class="ms-auto">
+                    <button data-form="busqueda_usuario" type="button" class="btn-close" aria-label="Close" 
+                            onclick="cerrarFormulario('frmbusqueda_usuario')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body text-secondary">
+            <table id="tblConsultaUsuarios" class="table">
+                <thead>
+                    <tr>
+                        <th colspan="6">
+                            <input id="txtBuscarUsuario" type="search" class="form-control"
+                                   placeholder="Buscar usuarios por documento, nombre">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>DOCUMENTO</th>
+                        <th>NOMBRE</th>
+                        <th>CORREO</th>
+                        <th>ROL</th>
+                        <th>ESTADO</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+<script>
+    listarUsuarios();
+
+    document.getElementById("txtBuscarUsuario").addEventListener("keyup", e => {
+        listarUsuarios(e.target.value);
+    });
+
+    async function listarUsuarios(buscar = '') {
+
+        const respuesta = await fetch(`https://localhost:7240/api/Usuarios/buscar?buscar=${buscar}`, {
+            method: 'GET',
+            headers: { "Content-Type": "application/json" }
+        });
+
+        const usuarios = await respuesta.json();
+        let filas = '';
+
+        usuarios.forEach(usuario => {
+            filas += `
+            <tr onclick='modificarUsuario(${JSON.stringify(usuario)})'>
+                <td>${usuario.documento}</td>
+                <td>${usuario.nombre_Completo}</td>
+                <td>${usuario.correo}</td>
+                <td>${usuario.idRol == 1 ? 'Administrador' : 'Empleado'}</td>
+                <td>${usuario.estado ? 'Activo' : 'Inactivo'}</td>
+                <td>
+                    <button type="button" class="btn btn-outline-danger btn-sm"
+                        onclick='eliminarUsuario(${JSON.stringify(usuario)}, event)'>
+                        DEL
+                    </button>
+                </td>
+            </tr>
+        `;
+        });
+
+        document.querySelector("#tblConsultaUsuarios tbody").innerHTML = filas;
+    }
+
+    async function eliminarUsuario(usuario, event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        if (!confirm(`¿Está seguro de eliminar al usuario ${usuario.nombre_Completo}?`)) return;
+
+        const respuesta = await fetch(`https://localhost:7240/api/Usuarios/${usuario.idUsuario}`, {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json" }
+        });
+
+        const data = await respuesta.text();
+
+        if (data && data.length > 0) {
+            alert(`Error al eliminar usuario: ${data}`);
+            return;
+        }
+
+        listarUsuarios();
+    }
+
+    function cerrarFormulario(id) {
+        document.getElementById(id).style.display = "none";
+    }
+</script>

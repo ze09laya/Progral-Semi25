@@ -1,0 +1,158 @@
+﻿
+<style>
+    #frmbusqueda_producto {
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 0.87rem;
+    }
+
+        #frmbusqueda_producto .card {
+            border: none !important;
+            background: #1f1f1f;
+            border-radius: 18px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+        }
+
+        #frmbusqueda_producto .card-header {
+            background: linear-gradient(90deg, #9bbfa9, #85b59b);
+            border-radius: 18px 18px 0 0;
+            font-size: 1.1rem;
+            color: #172820;
+            font-weight: 600;
+            padding: 14px 18px;
+        }
+
+        #frmbusqueda_producto .btn-close {
+            filter: invert(0%);
+        }
+
+        #frmbusqueda_producto table {
+            color: #d7e8df;
+        }
+
+        #frmbusqueda_producto th {
+            color: #b7d2c3;
+            font-weight: 600;
+            background-color: #2b2b2b !important;
+            border-bottom: 2px solid #3d3d3d;
+        }
+
+        #frmbusqueda_producto tbody tr {
+            background: #262626;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            #frmbusqueda_producto tbody tr:hover {
+                background: #2f3c34;
+            }
+
+        #frmbusqueda_producto input[type="search"] {
+            background: #2b2b2b;
+            border: 1px solid #6f9c85;
+            color: #d3e5da;
+            border-radius: 10px;
+            padding-left: 10px;
+            transition: 0.2s;
+        }
+
+            #frmbusqueda_producto input[type="search"]:focus {
+                border-color: #8cc7a7;
+                box-shadow: 0 0 6px rgba(140,199,167,0.4);
+            }
+
+        #frmbusqueda_producto .btn-outline-danger {
+            border-color: #d98a8a;
+            color: #e69c9c;
+        }
+
+            #frmbusqueda_producto .btn-outline-danger:hover {
+                background: #e69c9c;
+                color: #1f1f1f;
+            }
+</style>
+
+<form id="frmbusqueda_producto">
+    <div class="card border-secondary mb-3" style="min-width: 700px;">
+        <div class="card-header">
+            <div class="d-flex">
+                Consulta de Productos
+                <div class="ms-auto">
+                    <button type="button" class="btn-close" aria-label="Close"
+                            onclick="cerrarFormulario('busqueda_producto')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body text-secondary">
+
+            <table id="tblConsultaProductos" class="table">
+                <thead>
+                    <tr>
+                        <th colspan="7">
+                            <input id="txtBuscarProducto" type="search" class="form-control"
+                                   placeholder="Buscar productos por código o nombre">
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th>CÓDIGO</th>
+                        <th>NOMBRE</th>
+                        <th>DESCRIPCIÓN</th>
+             
+                        <th>PRECIO</th>
+                        <th>ESTADO</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+        </div>
+    </div>
+</form>
+
+<script>
+
+    listarProductos();
+
+
+    document.getElementById("txtBuscarProducto").addEventListener("keyup", e => {
+        listarProductos(e.target.value);
+    });
+
+    async function listarProductos(buscar = "") {
+
+        const respuesta = await fetch(`https://localhost:7240/api/Productos/buscar?buscar=${buscar}`);
+        const productos = await respuesta.json();
+
+        let filas = "";
+
+        productos.forEach(producto => {
+            filas += `
+                <tr onclick='modificarProducto(${JSON.stringify(producto)})'>
+                    <td>${producto.codigo}</td>
+                    <td>${producto.nombre}</td>
+                    <td>${producto.descripcion ?? ""}</td>
+           
+                    <td>${producto.precio_Venta}</td>
+                    <td>${producto.estado ? "Activo" : "Inactivo"}</td>
+                    <td>
+                        <button type="button"
+                                class="btn btn-outline-danger btn-sm"
+                                onclick='eliminarProducto(${JSON.stringify(producto)}, event)'>
+                            DEL
+                        </button>
+                    </td>
+                </tr>`;
+        });
+
+        document.querySelector("#tblConsultaProductos tbody").innerHTML = filas;
+    }
+
+    function cerrarFormulario(id) {
+        document.getElementById(id).style.display = "none";
+    }
+
+   
+
+</script>

@@ -1,0 +1,171 @@
+﻿
+
+<style>
+    #frmbusqueda_proveedor {
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 0.87rem;
+    }
+
+        #frmbusqueda_proveedor .card {
+            border: none !important;
+            background: #1f1f1f;
+            border-radius: 18px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+        
+        }
+
+        #frmbusqueda_proveedor .card-header {
+            background: linear-gradient(90deg, #9bbfa9, #85b59b);
+            border-radius: 18px 18px 0 0;
+            font-size: 1.1rem;
+            color: #172820;
+            font-weight: 600;
+            padding: 14px 18px;
+        }
+
+        #frmbusqueda_proveedor .btn-close {
+            filter: invert(0%);
+        }
+
+            #frmbusqueda_proveedor .btn-close:hover {
+                opacity: 1;
+            }
+
+    
+        #frmbusqueda_proveedor table {
+            color: #d7e8df;
+        }
+
+        #frmbusqueda_proveedor th {
+            color: #b7d2c3;
+            font-weight: 600;
+            background-color: #2b2b2b !important;
+            border-bottom: 2px solid #3d3d3d;
+        }
+
+        #frmbusqueda_proveedor tbody tr {
+            background: #262626;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            #frmbusqueda_proveedor tbody tr:hover {
+                background: #2f3c34;
+            }
+
+    
+        #frmbusqueda_proveedor input[type="search"] {
+            background: #2b2b2b;
+            border: 1px solid #6f9c85;
+            color: #d3e5da;
+            border-radius: 10px;
+            padding-left: 15px;
+            transition: 0.6s;
+
+            width: 110%; 
+        }
+
+
+            #frmbusqueda_proveedor input[type="search"]:focus {
+                border-color: #8cc7a7;
+                box-shadow: 0 0 6px rgba(140,199,167,0.4);
+            }
+
+   
+        #frmbusqueda_proveedor .btn-outline-danger {
+            border-color: #d98a8a;
+            color: #e69c9c;
+        }
+
+            #frmbusqueda_proveedor .btn-outline-danger:hover {
+                background: #e69c9c;
+                color: #1f1f1f;
+            }
+</style>
+
+
+<form id="frmbusqueda_proveedor">
+    <div class="card border-secondary mb-3" style="min-width: 700px;">
+        <div class="card-header">
+            <div class="d-flex">
+                Consulta de Proveedores
+                <div class="ms-auto">
+                    <button data-form="busqueda_proveedor" type="button" class="btn-close"
+                            aria-label="Close" onclick="cerrarFormulario('busqueda_proveedor')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body text-secondary">
+            <table id="tblConsultaProveedores" class="table">
+                <thead>
+                    <tr>
+                        <th colspan="5">
+                            <input id="txtBuscarProveedor" type="search" class="form-control"
+                                   placeholder="Buscar proveedores por documento, razón social o correo">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>DOCUMENTO</th>
+                        <th>RAZÓN SOCIAL</th>
+                        <th>TELEFONO</th>
+                        <th>ESTADO</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    listarProveedoresBusqueda();
+
+    document.getElementById("txtBuscarProveedor").addEventListener('keyup', e => {
+        listarProveedoresBusqueda(e.target.value);
+    });
+
+    async function listarProveedoresBusqueda(buscar = '') {
+
+        const url = `https://localhost:7240/api/Proveedor/buscar?buscar=${buscar}`;
+
+        const res = await fetch(url);
+        const proveedores = await res.json();
+
+        let filas = "";
+
+        proveedores.forEach(prov => {
+            filas += `
+                <tr onclick='modificarProveedor(${JSON.stringify(prov)})'>
+                    <td>${prov.idProveedor}</td>
+                    <td>${prov.documento}</td>
+                    <td>${prov.razon_Social}</td>
+                      <td>${prov.telefono}</td>
+                    <td>${prov.estado ? "Activo" : "Inactivo"}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-danger btn-sm"
+                                onclick='eliminarProveedor(${JSON.stringify(prov)}, event)'>
+                            DEL
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        document.querySelector("#tblConsultaProveedores tbody").innerHTML = filas;
+    }
+
+    function cerrarFormulario(id) {
+        document.getElementById(id).style.display = "none";
+    }
+
+    function buscar_proveedor() {
+        document.getElementById("frmbusqueda_proveedor").style.display = "block";
+        listarProveedoresBusqueda();
+        document.getElementById("txtBuscarProveedor").focus();
+    }
+
+</script>

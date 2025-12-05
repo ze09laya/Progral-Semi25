@@ -1,0 +1,204 @@
+﻿<form id="frmCategoria">
+    <style>
+        #frmCategoria {
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 0.87rem;
+        }
+
+            #frmCategoria .card {
+                border: none !important;
+                background: #1f1f1f;
+                border-radius: 18px;
+                box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+            }
+
+            #frmCategoria .card-header {
+                background: linear-gradient(90deg, #9bbfa9, #85b59b);
+                border-radius: 18px 18px 0 0;
+                font-size: 1.12rem;
+                color: #172820;
+                font-weight: 600;
+                padding: 14px 18px;
+            }
+
+            #frmCategoria .col-3, #frmCategoria .col-md-2 {
+                color: #cfe7d7;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+                letter-spacing: .3px;
+            }
+
+            #frmCategoria input, #frmCategoria select {
+                background: #2b2b2b;
+                border: 1px solid #6f9c85;
+                color: #d3e5da;
+                border-radius: 10px;
+                font-size: 0.88rem;
+                padding-left: 10px;
+                transition: 0.2s;
+            }
+
+                #frmCategoria input:focus, #frmCategoria select:focus {
+                    border-color: #8cc7a7;
+                    box-shadow: 0 0 6px rgba(140,199,167,0.5);
+                }
+
+            #frmCategoria .btn {
+                width: 115px;
+                border-radius: 12px;
+                font-weight: 600;
+                transition: .2s;
+                font-size: 0.87rem;
+            }
+
+        .btn-outline-primary {
+            border-color: #85b59b;
+            color: #9ad1b4;
+        }
+
+            .btn-outline-primary:hover {
+                background: #9ad1b4;
+                color: #1a1a1a;
+            }
+
+        .btn-outline-warning {
+            border-color: #cfe7d7;
+            color: #b3d4c2;
+        }
+
+            .btn-outline-warning:hover {
+                background: #d8eee3;
+                color: #000;
+            }
+
+        .btn-outline-success {
+            border-color: #7fb49a;
+            color: #9bd3b4;
+        }
+
+            .btn-outline-success:hover {
+                background: #7fb49a;
+                color: #fff;
+            }
+
+        #frmCategoria .btn-close {
+            filter: invert(0%);
+            opacity: 0.7;
+            transition: 0.2s;
+        }
+
+            #frmCategoria .btn-close:hover {
+                opacity: 1;
+            }
+    </style>
+
+    <div class="card border-secondary mb-3" style="min-width: 700px;">
+        <div class="card-header">
+            <div class="d-flex">
+                Administración de Categorías
+                <div class="ms-auto">
+                    <button data-form="Categoria" type="button" class="btn-close" aria-label="Close"
+                            onclick="cerrarFormulario('Categoria')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body text-secondary">
+
+            <input type="hidden" id="idCategoria">
+
+            <div class="row p-1">
+                <div class="col-3 col-md-2">DESCRIPCIÓN</div>
+                <div class="col-9 col-md-8">
+                    <input required type="text" maxlength="100" class="form-control" id="txtDescripcion" />
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-3 col-md-2">ESTADO</div>
+                <div class="col-9 col-md-4">
+                    <select id="cboEstadoCategoria" class="form-control">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-12 text-center">
+                    <input type="button" id="btnGuardarCategoriaForm" class="btn btn-outline-primary" value="Guardar" />
+                    <input type="reset" class="btn btn-outline-warning" value="Nuevo" />
+                    <input type="button" class="btn btn-outline-success" value="Buscar"
+                           onclick="abrirVentana('busqueda_categoria')" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    let categoriaEditando = null;
+    const API_CATEGORIA = "https://localhost:7240/api/Categoria";
+
+    document.getElementById("btnGuardarCategoriaForm").addEventListener("click", async () => {
+
+   
+        const descripcionMayus = document.getElementById("txtDescripcion").value.toUpperCase();
+
+        const categoria = {
+            idCategoria: categoriaEditando?.idCategoria ?? 0,
+            descripcion: descripcionMayus,
+            estado: document.getElementById("cboEstadoCategoria").value === "1"
+        };
+
+        let url = API_CATEGORIA;
+        let method = "POST";
+
+        if (categoriaEditando !== null) {
+            url = `${API_CATEGORIA}/${categoriaEditando.idCategoria}`;
+            method = "PUT";
+        }
+
+        try {
+            const response = await fetch(url, {
+                method: method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(categoria)
+            });
+
+            if (!response.ok) {
+                console.error(await response.text());
+                alert("Error al guardar categoría.");
+                return;
+            }
+
+            document.getElementById("frmCategoria").reset();
+            categoriaEditando = null;
+
+            if (typeof listarCategoriasBusqueda === "function") {
+                listarCategoriasBusqueda();
+            }
+
+        } catch (err) {
+            console.error("❌ Error:", err);
+        }
+    });
+
+    function modificarCategoria(cat) {
+        abrirVentana("Categoria");
+
+        setTimeout(() => {
+            document.getElementById("idCategoria").value = cat.idCategoria;
+            document.getElementById("txtDescripcion").value = cat.descripcion;
+            document.getElementById("cboEstadoCategoria").value = cat.estado ? "1" : "0";
+
+            categoriaEditando = cat;
+        }, 200);
+    }
+
+    function cerrarFormulario(id) {
+        document.getElementById(id).style.display = "none";
+    }
+</script>

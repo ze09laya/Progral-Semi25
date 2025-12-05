@@ -1,0 +1,238 @@
+﻿<form id="frmCliente">
+    <style>
+        #frmCliente {
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 0.87rem;
+        }
+
+            #frmCliente .card {
+                border: none !important;
+                background: #1f1f1f;
+                border-radius: 18px;
+                box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+            }
+
+            #frmCliente .card-header {
+                background: linear-gradient(90deg, #9bbfa9, #85b59b);
+                border-radius: 18px 18px 0 0;
+                font-size: 1.12rem;
+                color: #172820;
+                font-weight: 600;
+                padding: 14px 18px;
+            }
+
+            #frmCliente .col-3, #frmCliente .col-md-2 {
+                color: #cfe7d7;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+                letter-spacing: .3px;
+            }
+
+            #frmCliente input, #frmCliente select {
+                background: #2b2b2b;
+                border: 1px solid #6f9c85;
+                color: #d3e5da;
+                border-radius: 10px;
+                font-size: 0.88rem;
+                padding-left: 10px;
+                transition: 0.2s;
+            }
+
+                #frmCliente input:focus, #frmCliente select:focus {
+                    border-color: #8cc7a7;
+                    box-shadow: 0 0 6px rgba(140,199,167,0.5);
+                }
+
+            #frmCliente .btn {
+                width: 115px;
+                border-radius: 12px;
+                font-weight: 600;
+                transition: .2s;
+                font-size: 0.87rem;
+            }
+
+        .btn-outline-primary {
+            border-color: #85b59b;
+            color: #9ad1b4;
+        }
+
+            .btn-outline-primary:hover {
+                background: #9ad1b4;
+                color: #1a1a1a;
+            }
+
+        .btn-outline-warning {
+            border-color: #cfe7d7;
+            color: #b3d4c2;
+        }
+
+            .btn-outline-warning:hover {
+                background: #d8eee3;
+                color: #000;
+            }
+
+        .btn-outline-success {
+            border-color: #7fb49a;
+            color: #9bd3b4;
+        }
+
+            .btn-outline-success:hover {
+                background: #7fb49a;
+                color: #fff;
+            }
+
+        #frmCliente .btn-close {
+            filter: invert(0%);
+            opacity: 0.7;
+            transition: 0.2s;
+        }
+
+            #frmCliente .btn-close:hover {
+                opacity: 1;
+            }
+    </style>
+
+    <div class="card border-secondary mb-3" style="min-width: 700px;">
+        <div class="card-header">
+            <div class="d-flex">
+                Administración de Clientes
+                <div class="ms-auto">
+                    <button data-form="Cliente" type="button" class="btn-close" aria-label="Close"
+                            onclick="cerrarFormulario('Cliente')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body text-secondary">
+            <div class="row p-1">
+                <div class="col-3 col-md-2">DOCUMENTO</div>
+                <div class="col-9 col-md-4">
+                    <input required type="text" class="form-control" id="txtDocumentoCliente" />
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-3 col-md-2">NOMBRE</div>
+                <div class="col-9 col-md-8">
+                    <input required type="text" class="form-control" id="txtNombreCompletoCliente" />
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-3 col-md-2">CORREO</div>
+                <div class="col-9 col-md-8">
+                    <input type="email" class="form-control" id="txtCorreoCliente" />
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-3 col-md-2">TELÉFONO</div>
+                <div class="col-9 col-md-4">
+                    <input type="text" class="form-control" id="txtTelefonoCliente" />
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-3 col-md-2">DIRECCIÓN</div>
+                <div class="col-9 col-md-8">
+                    <input type="text" class="form-control" id="txtDireccionCliente" />
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-3 col-md-2">ESTADO</div>
+                <div class="col-9 col-md-4">
+                    <select id="cboEstadoCliente" class="form-control">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-12 text-center">
+                    <input type="button" id="btnGuardarCliente" class="btn btn-outline-primary" value="Guardar" />
+                    <input type="reset" class="btn btn-outline-warning" value="Nuevo" />
+                    <input type="button" class="btn btn-outline-success" value="Buscar"
+                           onclick="abrirVentana('busqueda_cliente')" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    let clienteEditando = null;
+
+    document.getElementById("btnGuardarCliente").addEventListener("click", async () => {
+
+        const cliente = {
+            documento: document.getElementById("txtDocumentoCliente").value,
+            nombre_Completo: document.getElementById("txtNombreCompletoCliente").value,
+            correo: document.getElementById("txtCorreoCliente").value,
+            telefono: document.getElementById("txtTelefonoCliente").value,
+            direccion: document.getElementById("txtDireccionCliente").value,
+            estado: document.getElementById("cboEstadoCliente").value === "1"
+        };
+
+        try {
+            let url = "https://localhost:7240/api/Clientes";
+            let method = "POST";
+
+            if (clienteEditando !== null && clienteEditando.idCliente) {
+                url = `https://localhost:7240/api/Clientes/${clienteEditando.idCliente}`;
+                method = "PUT";
+                cliente.idCliente = clienteEditando.idCliente;
+            }
+
+            const response = await fetch(url, {
+                method: method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(cliente)
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("❌ Error al guardar cliente:", errorText);
+
+                if (errorText.includes("UNIQUE KEY") || errorText.includes("duplicate key")) {
+                    alert("❗ Ya existe un cliente con ese DOCUMENTO.");
+                } else {
+                    alert("Error al guardar cliente. Revisa consola.");
+                }
+                return;
+            }
+
+            document.getElementById("frmCliente").reset();
+            clienteEditando = null;
+
+            if (typeof listarClientes === "function") listarClientes();
+
+            console.log("✔ Cliente guardado correctamente");
+
+        } catch (error) {
+            console.error("❌ No se pudo conectar con el servidor:", error);
+        }
+    });
+
+    function modificarCliente(cliente) {
+        abrirVentana("Cliente");
+
+        setTimeout(() => {
+            document.getElementById("txtDocumentoCliente").value = cliente.documento;
+            document.getElementById("txtNombreCompletoCliente").value = cliente.nombre_Completo;
+            document.getElementById("txtCorreoCliente").value = cliente.correo;
+            document.getElementById("txtTelefonoCliente").value = cliente.telefono;
+            document.getElementById("txtDireccionCliente").value = cliente.direccion;
+            document.getElementById("cboEstadoCliente").value = cliente.estado ? "1" : "0";
+
+            clienteEditando = cliente;
+        }, 200);
+    }
+
+    function cerrarFormulario(id) {
+        document.getElementById(id).style.display = "none";
+    }
+</script>

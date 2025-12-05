@@ -1,0 +1,176 @@
+﻿<style>
+    #frmBusquedaVenta {
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 0.87rem;
+    }
+
+        #frmBusquedaVenta .card {
+            border: none !important;
+            background: #1f1f1f;
+            border-radius: 18px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+        }
+
+        #frmBusquedaVenta .card-header {
+            background: linear-gradient(90deg, #9bbfa9, #85b59b);
+            border-radius: 18px 18px 0 0;
+            font-size: 1.1rem;
+            color: #172820;
+            font-weight: 600;
+            padding: 14px 18px;
+        }
+
+        #frmBusquedaVenta .btn-close {
+            filter: invert(0%);
+        }
+
+        #frmBusquedaVenta table {
+            color: #d7e8df;
+        }
+
+        #frmBusquedaVenta th {
+            color: #b7d2c3;
+            font-weight: 600;
+            background-color: #2b2b2b !important;
+            border-bottom: 2px solid #3d3d3d;
+        }
+
+        #frmBusquedaVenta tbody tr {
+            background: #262626;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            #frmBusquedaVenta tbody tr:hover {
+                background: #2f3c34;
+            }
+
+        #frmBusquedaVenta input[type="search"] {
+            background: #2b2b2b;
+            border: 1px solid #6f9c85;
+            color: #d3e5da;
+            border-radius: 10px;
+            padding-left: 10px;
+            transition: 0.2s;
+        }
+
+            #frmBusquedaVenta input[type="search"]:focus {
+                border-color: #8cc7a7;
+                box-shadow: 0 0 6px rgba(140,199,167,0.4);
+            }
+
+        #frmBusquedaVenta .btn-outline-danger {
+            border-color: #d98a8a;
+            color: #e69c9c;
+        }
+
+            #frmBusquedaVenta .btn-outline-danger:hover {
+                background: #e69c9c;
+                color: #1f1f1f;
+            }
+</style>
+
+<form id="frmBusquedaVenta">
+    <div class="card border-secondary mb-3" style="min-width: 700px;">
+        <div class="card-header">
+            <div class="d-flex">
+                Consulta de Ventas
+                <div class="ms-auto">
+                    <button data-form="busqueda_venta" type="button" class="btn-close" aria-label="Close"
+                            onclick="cerrarFormulario('frmbusqueda_venta')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body text-secondary">
+            <table id="tblConsultaVentas" class="table">
+                <thead>
+                    <tr>
+                        <th colspan="6">
+                            <input id="txtBuscarVenta" type="search" class="form-control"
+                                   placeholder="Buscar por documento, número">
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th>TIPO DOC</th>
+                        <th>NÚMERO</th>
+                        <th>CLIENTE</th>
+                        <th>MONTO TOTAL</th>
+                        <th>FECHA</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    listarVentas();
+
+    document.getElementById("txtBuscarVenta").addEventListener("keyup", e => {
+        listarVentas(e.target.value);
+    });
+
+    async function listarVentas(buscar = '') {
+
+        const respuesta = await fetch(`https://localhost:7240/api/Ventas/buscar?buscar=${buscar}`, {
+            method: 'GET',
+            headers: { "Content-Type": "application/json" }
+        });
+
+        const ventas = await respuesta.json();
+        let filas = '';
+
+        ventas.forEach(venta => {
+            filas += `
+            <tr onclick='modificarVenta(${JSON.stringify(venta)})'>
+                <td>${venta.tipo_Documento}</td>
+                <td>${venta.numero_Documento}</td>
+                <td>${venta.cliente ? venta.cliente.nombre_Completo : "SIN CLIENTE"}</td>
+                <td>$${venta.monto_Total.toFixed(2)}</td>
+                <td>${new Date(venta.fecha_Registro).toLocaleDateString()}</td>
+
+                <td>
+                    <button type="button" class="btn btn-outline-danger btn-sm"
+                        onclick='eliminarVenta(${JSON.stringify(venta)}, event)'>
+                        DEL
+                    </button>
+                </td>
+            </tr>`;
+        });
+
+        document.querySelector("#tblConsultaVentas tbody").innerHTML = filas;
+    }
+
+
+    async function eliminarVenta(venta, event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        if (!confirm(`¿Eliminar la venta Nº ${venta.numero_Documento}?`)) return;
+
+        const respuesta = await fetch(`https://localhost:7240/api/Ventas/${venta.idVenta}`, {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json" }
+        });
+
+        const data = await respuesta.text();
+
+        if (data && data.length > 0) {
+            alert("Error al eliminar venta: " + data);
+            return;
+        }
+
+        listarVentas();
+    }
+
+    function cerrarFormulario(id) {
+        document.getElementById(id).style.display = "none";
+    }
+
+</script>

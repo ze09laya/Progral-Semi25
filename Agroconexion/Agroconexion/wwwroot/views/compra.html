@@ -1,0 +1,337 @@
+﻿<form id="frmCompra">
+    <style>
+        #frmCompra {
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 0.87rem;
+        }
+
+            #frmCompra .card {
+                border: none !important;
+                background: #1f1f1f;
+                border-radius: 18px;
+                box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+                padding: 18px;
+                margin-bottom: 20px;
+            }
+
+            #frmCompra input, #frmCompra select {
+                background: #2c2c2c !important;
+                border-radius: 10px !important;
+                border: 1px solid #444 !important;
+                color: white !important;
+            }
+
+        #tablaDetalles th {
+            color: #f0f0f0;
+        }
+
+        #tablaDetalles td {
+            color: #dcdcdc;
+        }
+    </style>
+
+    <div class="card">
+        <h4 style="color:white;">Registrar Compra</h4>
+
+     
+        <div class="row">
+            <div class="col-md-4">
+                <label style="color:white;">Tipo Documento</label>
+                <select id="tipoDocumento" class="form-control">
+                    <option value="Factura">Factura</option>
+                    <option value="Tiquete">Tiquete</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label style="color:white;">Número Documento</label>
+                <input id="numeroDocumento" type="text" class="form-control">
+            </div>
+
+            <div class="col-md-4">
+                <label style="color:white;">Proveedor</label>
+                <select id="proveedor" class="form-control"></select>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label style="color:white;">Producto</label>
+                <select id="producto" class="form-control"></select>
+            </div>
+
+            <div class="col-md-2">
+                <label style="color:white;">Cantidad</label>
+                <input id="cantidad" type="number" class="form-control" min="1" value="1">
+            </div>
+
+            <div class="col-md-2">
+                <label style="color:white;">Precio Compra</label>
+                <input id="precioCompra" type="number" class="form-control" step="0.01">
+            </div>
+
+            <div class="col-md-2">
+                <label style="color:white;">Precio Venta</label>
+                <input id="precioVenta" type="number" class="form-control" step="0.01">
+            </div>
+
+            <div class="col-md-2">
+                <label style="color:white;">&nbsp;</label>
+                <button type="button" id="btnAgregar" class="btn btn-success form-control">
+                    Agregar
+                </button>
+            </div>
+        </div>
+
+        <br>
+
+        <table class="table table-dark" id="tablaDetalles">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Compra</th>
+                    <th>Precio Venta</th>
+                    <th>Total</th>
+                    <th>Quitar</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <h4 style="color:white;">Total: $<span id="totalGeneral">0.00</span></h4>
+
+        <br>
+
+        <button type="button" id="btnGuardar" class="btn btn-primary">Guardar Compra</button>
+    </div>
+
+
+   
+    <div style="text-align: right;">
+        <button type="button" onclick="window.location.href='index.html'"
+                style="
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+        ">
+            ✖
+        </button>
+    </div>
+
+
+
+</form>
+
+<script>
+    let detalles = [];
+
+
+    function obtenerUsuarioLogueado() {
+        let user = localStorage.getItem("usuarioLogueado");
+        if (!user) return null;
+
+        try {
+            return JSON.parse(user);
+        } catch {
+            return null;
+        }
+    }
+
+
+    async function cargarProveedores() {
+        let urls = [
+            "https://localhost:7240/api/Proveedores",
+            "https://localhost:7240/api/Proveedores/Lista",
+            "https://localhost:7240/api/Proveedor"
+        ];
+
+        for (const url of urls) {
+            try {
+                const res = await fetch(url);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        llenarProveedores(data);
+                        return;
+                    }
+                }
+            } catch { }
+        }
+
+        document.getElementById("proveedor").innerHTML =
+            `<option value="">No hay proveedores</option>`;
+    }
+
+    function llenarProveedores(lista) {
+        let select = document.getElementById("proveedor");
+        select.innerHTML = "";
+        lista.forEach(p => {
+            let opt = document.createElement("option");
+            opt.value = p.idProveedor;
+            opt.textContent = p.razon_Social || p.nombre || "Proveedor";
+            select.appendChild(opt);
+        });
+    }
+
+    async function cargarProductos() {
+        const res = await fetch("https://localhost:7240/api/Productos");
+        const data = await res.json();
+
+        let select = document.getElementById("producto");
+        select.innerHTML = "";
+
+        data.forEach(p => {
+            let opt = document.createElement("option");
+            opt.value = p.idProducto;
+            opt.textContent = p.nombre;
+            opt.dataset.precioCompra = p.precio_Compra;
+            opt.dataset.precioVenta = p.precio_Venta;
+            select.appendChild(opt);
+        });
+
+        actualizarPreciosProducto();
+    }
+
+    function actualizarPreciosProducto() {
+        let select = document.getElementById("producto");
+        let selected = select.selectedOptions[0];
+
+        if (selected) {
+            document.getElementById("precioCompra").value = selected.dataset.precioCompra;
+            document.getElementById("precioVenta").value = selected.dataset.precioVenta;
+        }
+    }
+
+    document.getElementById("producto").addEventListener("change", actualizarPreciosProducto);
+
+    cargarProductos();
+    cargarProveedores();
+
+    document.getElementById("btnAgregar").onclick = function () {
+
+        let idProducto = document.getElementById("producto").value;
+        let cantidad = parseInt(document.getElementById("cantidad").value);
+        let precioCompra = parseFloat(document.getElementById("precioCompra").value);
+        let precioVenta = parseFloat(document.getElementById("precioVenta").value);
+
+        if (!idProducto || cantidad <= 0 || precioCompra <= 0) {
+            alert("Complete todos los datos del producto.");
+            return;
+        }
+
+        let total = cantidad * precioCompra;
+
+        detalles.push({
+            idProducto,
+            cantidad,
+            precioCompra,
+            precioVenta,
+            total
+        });
+
+        actualizarTabla();
+    };
+
+    function actualizarTabla() {
+        let tbody = document.querySelector("#tablaDetalles tbody");
+        tbody.innerHTML = "";
+
+        let suma = 0;
+
+        detalles.forEach((d, i) => {
+            suma += d.total;
+
+            let nombre = document.querySelector(`#producto option[value="${d.idProducto}"]`).textContent;
+
+            tbody.innerHTML += `
+                <tr>
+                    <td>${nombre}</td>
+                    <td>${d.cantidad}</td>
+                    <td>$${d.precioCompra.toFixed(2)}</td>
+                    <td>$${d.precioVenta.toFixed(2)}</td>
+                    <td>$${d.total.toFixed(2)}</td>
+                    <td><button class="btn btn-danger btn-sm" onclick="quitar(${i})">X</button></td>
+                </tr>
+            `;
+        });
+
+        document.getElementById("totalGeneral").textContent = suma.toFixed(2);
+    }
+
+    function quitar(i) {
+        detalles.splice(i, 1);
+        actualizarTabla();
+    }
+
+    function limpiarFormulario() {
+        document.getElementById("tipoDocumento").value = "Factura";
+        document.getElementById("numeroDocumento").value = "";
+        document.getElementById("proveedor").selectedIndex = 0;
+        document.getElementById("producto").selectedIndex = 0;
+        document.getElementById("cantidad").value = 1;
+
+        actualizarPreciosProducto(); 
+
+        document.getElementById("precioCompra").value = "";
+        document.getElementById("precioVenta").value = "";
+
+        detalles = [];
+        actualizarTabla();
+    }
+
+
+    document.getElementById("btnGuardar").onclick = async function () {
+
+        let user = obtenerUsuarioLogueado();
+
+        if (!user || !user.idUsuario) {
+            alert("❌ Error: No hay usuario logueado.");
+            return;
+        }
+
+        let idUsuario = user.idUsuario;
+        let idProveedor = parseInt(document.getElementById("proveedor").value);
+
+        if (!idProveedor) {
+            alert("Debe seleccionar un proveedor.");
+            return;
+        }
+
+        let monto = parseFloat(document.getElementById("totalGeneral").textContent);
+
+        let compra = {
+            idUsuario: idUsuario,
+            idProveedor: idProveedor,
+            tipo_Documento: document.getElementById("tipoDocumento").value,
+            numero_Documento: document.getElementById("numeroDocumento").value,
+            monto_Total: monto,
+            fecha_Registro: new Date().toISOString()
+        };
+
+        console.log("📤 ENVIANDO A API:", compra);
+
+        const res = await fetch("https://localhost:7240/api/Compras", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(compra)
+        });
+
+        if (res.ok) {
+            alert("✔ Compra registrada correctamente");
+            limpiarFormulario();   
+            detalles = [];
+            actualizarTabla();
+        } else {
+            let info = await res.text();
+            console.error(info);
+            alert("❌ Error al guardar la compra");
+        }
+    };
+</script>

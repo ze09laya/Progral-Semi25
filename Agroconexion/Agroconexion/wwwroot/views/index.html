@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html data-bs-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <title>AgroConexión - Panel Principal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #1b1f22 !important;
+            color: #fff !important;
+        }
+
+        .navbar-modern {
+            background: #111417;
+            padding: 0.8rem 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+            border-bottom: 1px solid #2a2f35;
+        }
+
+        .navbar-brand span {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: .5px;
+            color: #c8b8a6;
+            margin-left: 10px;
+        }
+
+ 
+        .menu-modern a {
+            color: #dcd2c7 !important;
+            font-weight: 500;
+            padding: .45rem 1rem;
+            border-radius: 8px;
+            transition: .25s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+            .menu-modern a:hover {
+                background: #2d3b32;
+                color: #9ad0a0 !important;
+                transform: translateY(-2px);
+            }
+
+        .btn-logout {
+            background-color: #c8b8a6;
+            border: none;
+            color: #000;
+            font-weight: 600;
+            padding: .45rem 1rem;
+            border-radius: 10px;
+            transition: .2s;
+        }
+
+            .btn-logout:hover {
+                background-color: #b3a291;
+                transform: translateY(-2px);
+            }
+
+
+        .detail-card {
+            background: #111417;
+            border: 1px solid #2a2f35;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+            .detail-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+                border-color: #c8b8a6;
+            }
+
+            .detail-card .icon-box {
+                width: 70px;
+                height: 70px;
+                background: linear-gradient(135deg, #c8b8a6 0%, #9a8a7a 100%);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 1.2rem;
+                transition: all 0.3s ease;
+            }
+
+            .detail-card:hover .icon-box {
+                transform: scale(1.1);
+            }
+
+            .detail-card .icon-box i {
+                font-size: 2rem;
+                color: #000;
+            }
+
+            .detail-card h4 {
+                color: #c8b8a6;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+
+            .detail-card p {
+                color: #9ca3af;
+                font-size: 0.9rem;
+                margin: 0;
+            }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar-modern d-flex align-items-center justify-content-between">
+
+        <div class="d-flex align-items-center">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="/img/logo.png" height="48" />
+                <span>AgroConexión</span>
+            </a>
+
+            <div class="menu-modern d-flex flex-row gap-2 ms-4" id="mnxAcademica">
+                <a class="nav-link" data-form="Usuario">
+                    <i class="bi bi-people"></i> Usuarios
+                </a>
+                <a class="nav-link" data-form="Producto">
+                    <i class="bi bi-box-seam"></i> Productos
+                </a>
+                <a class="nav-link" data-form="Categoria">
+                    <i class="bi bi-tags"></i> Categorías
+                </a>
+                <a class="nav-link" data-form="Proveedor">
+                    <i class="bi bi-truck"></i> Proveedores
+                </a>
+
+                <a class="nav-link" data-form="Cliente">
+                    <i class="bi bi-person"></i> Clientes
+                </a>
+
+                <a class="nav-link" data-form="Compra">
+                    <i class="bi bi-cart-plus"></i> Compras
+                </a>
+
+                <a class="nav-link" data-form="venta">
+                    <i class="bi bi-cash"></i> ventas
+                </a>
+            </div>
+        </div>
+
+        <button id="btnLogout" class="btn btn-logout">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+        </button>
+
+    </nav>
+
+
+
+    <div class="container-fluid">
+        <div class="position-absolute" id="Usuario" style="z-index: 1000;"></div>
+        <div class="position-absolute" id="busqueda_usuario" style="z-index: 1000;"></div>
+
+        <div class="position-absolute" id="Producto" style="z-index: 1000;"></div>
+        <div class="position-absolute" id="busqueda_producto" style="z-index: 1000;"></div>
+
+        <div class="position-absolute" id="Categoria" style="z-index: 1000;"></div>
+        <div class="position-absolute" id="busqueda_categoria" style="z-index: 1000;"></div>
+
+        <div class="position-absolute" id="Proveedor" style="z-index: 1000;"></div>
+        <div class="position-absolute" id="busqueda_proveedor" style="z-index: 1000;"></div>
+
+        <div class="position-absolute" id="Cliente" style="z-index: 1000;"></div>
+        <div class="position-absolute" id="busqueda_cliente" style="z-index: 1000;"></div>
+
+        <div class="position-absolute" id="Compra" style="z-index: 1000;"></div>
+        <div class="position-absolute" id="busqueda_compra" style="z-index: 1000;"></div>
+
+        <div class="position-absolute" id="venta" style="z-index: 1000;"></div>
+        <div class="position-absolute" id="busqueda_venta" style="z-index: 1000;"></div>
+        <div class="position-absolute" id="detalle_venta" style="z-index: 1000;"></div>
+        <div class="position-absolute" id="detalle_compra" style="z-index: 1000;"></div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <div class="container mt-4 d-flex justify-content-center">
+        <div class="p-4 rounded text-center"
+             style="background:#111417; border:1px solid #2a2f35;
+                width:70%; max-width:700px; box-shadow:0 3px 8px rgba(0,0,0,0.3);">
+
+            <h2 class="fw-bold mb-2" style="color:#c8b8a6;">
+                Panel Administrativo
+            </h2>
+
+            <p class="text-muted mb-0" style="font-size:0.95rem;">
+                Gestiona usuarios, productos, ventas, compras y más desde un solo lugar.
+            </p>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            document.getElementById("mnxAcademica").addEventListener("click", (event) => {
+                if (event.target.dataset.form) {
+                    abrirVentana(event.target.dataset.form);
+                }
+            });
+
+            document.getElementById("btnLogout").addEventListener("click", () => {
+                if (confirm("¿Desea cerrar sesión?")) {
+                    window.location.href = "/views/login.html";
+                }
+            });
+        });
+
+        function abrirVentana(form) {
+            let contenedor = $(`#${form}`);
+
+            if (contenedor.find("form").length > 0) {
+                contenedor.show();
+            } else {
+                let url = `/views/${form}.html`;
+
+                fetch(url)
+                    .then(resp => resp.text())
+                    .then(vista => {
+                        contenedor.html(vista).draggable();
+                        activarCierre();
+                    })
+                    .catch(err => console.error("Error cargando vista:", err));
+            }
+        }
+
+
+        function abrirDetalle(tipo) {
+            let contenedor = $(`#${tipo}`);
+            let archivo = tipo === 'detalle_ventas' ? 'detalle_ventas.html' : 'detalle_compras.html';
+
+            if (contenedor.find("form, .modal, .card").length > 0) {
+                contenedor.show();
+            } else {
+                let url = `/views/${archivo}`;
+
+                fetch(url)
+                    .then(resp => resp.text())
+                    .then(vista => {
+                        contenedor.html(vista).draggable();
+                        activarCierre();
+                    })
+                    .catch(err => console.error("Error cargando detalle:", err));
+            }
+        }
+
+        function activarCierre() {
+            $(".btn-close").off("click").on("click", function () {
+                let target = $(this).data("form");
+                $(`#${target}`).hide();
+            });
+        }
+
+  
+    </script>
+
+</body>
+</html>

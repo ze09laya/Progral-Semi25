@@ -1,0 +1,159 @@
+﻿
+<style>
+    #frmbusqueda_categoria {
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 0.87rem;
+    }
+
+        #frmbusqueda_categoria .card {
+            border: none !important;
+            background: #1f1f1f;
+            border-radius: 18px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+        }
+
+        #frmbusqueda_categoria .card-header {
+            background: linear-gradient(90deg, #9bbfa9, #85b59b);
+            border-radius: 18px 18px 0 0;
+            font-size: 1.1rem;
+            color: #172820;
+            font-weight: 600;
+            padding: 14px 18px;
+        }
+
+        #frmbusqueda_categoria .btn-close {
+            filter: invert(0%);
+        }
+
+            #frmbusqueda_categoria .btn-close:hover {
+                opacity: 1;
+            }
+
+        #frmbusqueda_categoria table {
+            color: #d7e8df;
+        }
+
+        #frmbusqueda_categoria th {
+            color: #b7d2c3;
+            font-weight: 600;
+            background-color: #2b2b2b !important;
+            border-bottom: 2px solid #3d3d3d;
+        }
+
+        #frmbusqueda_categoria tbody tr {
+            background: #262626;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            #frmbusqueda_categoria tbody tr:hover {
+                background: #2f3c34;
+            }
+
+ 
+        #frmbusqueda_categoria input[type="search"] {
+            background: #2b2b2b;
+            border: 1px solid #6f9c85;
+            color: #d3e5da;
+            border-radius: 10px;
+            padding-left: 10px;
+            transition: 0.2s;
+        }
+
+            #frmbusqueda_categoria input[type="search"]:focus {
+                border-color: #8cc7a7;
+                box-shadow: 0 0 6px rgba(140,199,167,0.4);
+            }
+
+   
+        #frmbusqueda_categoria .btn-outline-danger {
+            border-color: #d98a8a;
+            color: #e69c9c;
+        }
+
+            #frmbusqueda_categoria .btn-outline-danger:hover {
+                background: #e69c9c;
+                color: #1f1f1f;
+            }
+</style>
+
+<form id="frmbusqueda_categoria">
+    <div class="card border-secondary mb-3" style="min-width: 700px;">
+        <div class="card-header">
+            <div class="d-flex">
+                Consulta de Categorías
+                <div class="ms-auto">
+                    <button data-form="busqueda_categoria" type="button" class="btn-close"
+                            aria-label="Close" onclick="cerrarFormulario('busqueda_categoria')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body text-secondary">
+            <table id="tblConsultaCategorias" class="table">
+                <thead>
+                    <tr>
+                        <th colspan="4">
+                            <input id="txtBuscarCategoria" type="search" class="form-control"
+                                   placeholder="Buscar categorías por descripción">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>DESCRIPCIÓN</th>
+                        <th>ESTADO</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+<script>
+    listarCategoriasBusqueda();
+
+    document.getElementById("txtBuscarCategoria").addEventListener('keyup', e => {
+        listarCategoriasBusqueda(e.target.value);
+    });
+
+    async function listarCategoriasBusqueda(buscar = '') {
+
+        const url = `https://localhost:7240/api/Categoria/buscar?buscar=${buscar}`;
+
+        const res = await fetch(url);
+        const categorias = await res.json();
+
+        let filas = "";
+
+        categorias.forEach(cat => {
+            filas += `
+                <tr onclick='modificarCategoria(${JSON.stringify(cat)})'>
+                    <td>${cat.idCategoria}</td>
+                    <td>${cat.descripcion}</td>
+                    <td>${cat.estado ? "Activo" : "Inactivo"}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-danger btn-sm"
+                                onclick='eliminarCategoria(${JSON.stringify(cat)}, event)'>
+                            DEL
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        document.querySelector("#tblConsultaCategorias tbody").innerHTML = filas;
+    }
+
+    function cerrarFormulario(id) {
+        document.getElementById(id).style.display = "none";
+    }
+
+    
+    function buscar_categoria() {
+        document.getElementById("frmbusqueda_categoria").style.display = "block";
+        listarCategoriasBusqueda();
+        document.getElementById("txtBuscarCategoria").focus();
+    }
+</script>
